@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+   <meta name="viewport" content="width=device-width, initial-scale=1" /><link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+   <script crossorigin="anonymous" src="https://kit.fontawesome.com/3c5be74ba6.js"></script><script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <title>Astronomy Picture</title>
+  </head>
+  <body>
+  <div id="load"><ul><li><h1 class="fa fa-spinner fa-spin"></h1></li><li>
+<h3>Loading...</h3></li></ul></div>
+
+<div id="error"><ul><li><h1 class="fa fa-spinner fa-spin"></h1></li><li>
+<h3>Something went wrong.</h3></li>
+<li><h3>Please Try again later.</h3>
+</li> </ul></div>
+
+<div id="nav"><ul><a href="#menu" onclick="nav()"><li><h3>Menu</h3><h3 class="fa fa-angle-right"></h3></li></a><a href="#about" onclick="nav()">
+<li><h3>About</h3><h3 class="fa fa-angle-right"></h3></li></a><li><h3>Font Size:</h3><h3 id="val">18px</h3></li><li><input type="range" min="18" max="48" value="18" id="range" oninput="range(this.value)"></li>
+<li><h3>Font Color:</h3><input type="text" id="inp" ng-model="cl" ng-init="cl='#000'" placeholder="Name or HEX"></li><li><h3>Background:</h3><input type="text" id="inp" ng-model="bg" ng-init="bg='#fff'" placeholder="Name or HEX"></li>
+<li><h3>Other bg:</h3><input type="text" id="inp" ng-model="bbg" ng-init="bbg='#eaebed'" placeholder="Name or HEX"></li>
+</ul><div id="close" onclick="nav()"></div></div>
+  <p id="menu"></p>
+  <div id="result">
+<div id="bar"><h3>Astronomy Picture of the Day.</h3><img id="bars" src="https://i.imgur.com/R4oyIso.png" onclick="nav()"></div>      
+  </div>
+  <div id="about"><ul>     
+ <li><h1>About</h1></li>
+ <li><h3>SOCIAL MEDIA</h3></li>
+<li><h4>Created By Aziz Sobirov</h4></li><li id="social">
+<a class="fa fa-facebook" href="https://www.facebook.com/aziz.dev2021" ></a>
+<a class="fa fa-github"   href="https://github.com/AzizSobirov" ></a><a class="fa fa-instagram" href="https://www.instagram.com/invites/contact/?i=gz463grqagzp&utm_content=4k1xq38"></a>
+<a class="fa fa-code" href="https://www.sololearn.com/Profile/17554249/?ref=app"></a>    
+</li>
+<li><h4>Get exclusive news in the Telegram.</h4></li>
+<li><button id="sign"><a href="https://t.me/Sololearn_news">Join Channel.</a></button></li>
+
+<li><h4><b>Terms & conditions </b>
+<b> Privacy policy</b></h4></li>
+ <li><h3>Copyright &copy Aziz Sobirov 2021</h3></li>
+ </ul></div>    
+  <script>
+  setTimeout(() => {
+    var load = document.getElementById("load")
+    load.style.display="none" 
+},5000)
+
+function nav(){
+document.querySelector("body").classList.toggle("nav")}
+
+function range(value){
+    var desc = document.getElementById("desc")
+    desc.style.fontSize= value+"px"
+document.getElementById("val").innerHTML= value+"px"
+}
+ var result = document.getElementById("result")
+ var API = "?api_key=jAJ0bGSO7AdvMAKiRzes2QnE8JHLsBYZfhtewWQf"     
+//fetch api      
+fetch("https://api.nasa.gov/planetary/apod"+API)
+.then(response => response.json())
+.then(data => {
+ var title = data.title
+ var description = data.explanation
+ result.innerHTML+=`<ul>     
+<li><h2>${title}</h2></li>    
+<li><img src="${data.hdurl}" 
+ alt="${title}"/></li><li><h3 id="desc">${description}</h3></li>
+ </ul>`})
+.catch(err => document.getElementById("error").style.display="flex")
+ 
+ </script>    
+ <style>
+     :root{
+    scroll-behavior:smooth;
+    --bg:{{bbg}};
+    --cl:{{cl}};
+    --bbg:{{bg}};
+}
+a{text-decoration:none;color:#000;}
+#bars{cursor:pointer ;
+    height:25px;width:25px;
+    background-size:cover;
+    transform:rotateY(180deg);    
+    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box ;
+    font-family:"Quicksand";
+}body{min-height:100vh;}
+#load,#error{
+    position:fixed ;
+    top:0;left:0;z-index:2;
+    height:100vh;width:100vw;
+    background:var(--bg);
+    display:none;align-items:center ;
+    justify-content:center ;
+}#load li{padding:5px;}
+#error li{padding:10px;}
+#load{display:flex;}
+#bar{
+    position:fixed;padding:10px;
+    top:0px;left:0;transition:1s;
+    height:55px;width:100vw;
+    display:flex;align-items:center ;
+    justify-content:space-between;
+    background:var(--bg);
+    color:var(--cl);
+}#nav,#close{
+    position:fixed ;padding:10px;
+    top:0;height:100vh;
+    transition:0.7s;z-index:3;
+}#nav{left:-70vw;width:70vw;background:var(--bg);}
+#close{right:-30vw;width:30vw;}
+body.nav #nav{left:0vw;}
+body.nav #close{right:0vw;}
+#nav li{color:var(--cl);
+    padding:10px;display:flex;
+    align-items:center;transition:1s;
+    justify-content:space-between;
+}#nav li:hover{color:#00adff;
+background:rgba(0,0,0,.10);}
+ul{list-style:none;text-align:center;}
+#result li{width:100vw;padding:10px;}
+img{width:100%;background-size:cover;}
+#result{
+    padding:55px 0px 0px 0px;
+    background:var(--bbg);
+}#result h4{color:#00adff;}
+#range{
+    width:100%;height:10px;
+    background:transparent ;
+    outline:none;
+    border-radius:10px;
+    border:2px solid #000;
+    -webkit-appearance:none;
+}
+#range::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    height:20px;width:20px;
+    border-radius:20px;
+    border:2px solid #000;
+    background:#fff;
+}
+#about{
+    width:100vw;padding:10px;
+    background:var(--bg);
+    color:var(--cl);
+}
+#inp{transition:1s;background:#fff;
+    width:100px;padding:2px;
+    border:none;outline:none;
+    box-shadow:0 0 0 2px #000;
+}
+#inp:focus{box-shadow:0 0 0.5px 2px #00adff;}
+
+#social{
+    width:100%;padding:10px;
+    display:flex;font-size:24px;
+    justify-content:space-around;
+}
+b{cursor:pointer ;}
+#sign{cursor:pointer ;
+    font-size:18px;font-weight:700;
+    min-height:30px;min-width:100px;
+    background:transparent ;
+    border-radius:30px;padding:5px;
+    border:none;outline:none;
+    color:var(--cl);margin:10px;
+    text-transform:uppercase ;
+    box-shadow:0 0 2px 4px #00adff;
+}
+ </style> 
+ </body>
+</html>
