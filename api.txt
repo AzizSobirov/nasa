@@ -1,0 +1,10 @@
+
+
+
+weather api - https://api.openweathermap.org/data/2.5/weather?q=Uzbekistan&appid='+API
+
+api key = 8d24787fa0102884fed55aae44f24567
+
+get img - https://openweathermap.org/img/wn/"+icon +"@2x.png
+
+kelvin = KELVIN = 273.15
