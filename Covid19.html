@@ -6,11 +6,11 @@
   </head>
   <body>
   <!--Error Page-->
-  <div id="error"><ul><li><h2 class="far fa-sad-tear"></h2></li>
+  <div id="error"><ul><li><img src="https://i.imgur.com/qngZ1ct.png" id="sad"></li>
     <li><h1>404</h1></li>
     <li><h3>Page Not Found.</h3></li>
     <li><h3 style="color:var(--cl);">
-Please Check your connection and try again.</h3></li><li><h4 onclick="close1()">Reload Page <i class="fa fa-redo-alt"></i></h4></li>
+Please Check your connection and try again.</h3></li><li><h4  onclick="close1()">Reload Page <img src="https://i.imgur.com/LxgCjxH.png" id="reload"></h4></li>
     </ul>
 </div>
 
@@ -120,13 +120,13 @@ more.style.display="none"
 function close1(){
 error.style.display="none"
 }
-
 window.addEventListener("scroll",function(){
 var navbar = 
 document.getElementById("search-bar");
 navbar.classList.toggle("active",window.scrollY > 0);
 })
-</script>    
+</script>   
+
 <style>
     :root{
     --cl:#38b3D0;
@@ -206,15 +206,16 @@ td{font-family:"Handlee";}
     height:100vh;width:100vw;
     display:none;place-items:center ;
 }
-#error h1{font-size:6em;}
-#error h2{font-size:4em;}
+#error #sad{height:100px;width:100px;}
+#error #reload{height:20px;}
 #error h4{
-    margin:20px auto;padding:5px;
+    margin:10px auto;padding:5px;
     width:130px;cursor:pointer ;
     border-radius:20px;color:#000;
-    white-space:nowrap ;
     box-shadow:0 0 0 2px #000;
+    display:flex;align-items:center ;
+    justify-content:space-around;
 }
-</style>
+</style> 
   </body>
 </html>
