@@ -219,3 +219,506 @@ td{font-family:"Handlee";}
 </style> 
   </body>
 </html>
+<!--Created By Aziz Sobirov-->
+
+<!--Don't copy my code-->
+
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" /><link href="https://fonts.googleapis.com/css?family=Quicksand|Handlee" rel="stylesheet"><script crossorigin="anonymous" src="https://kit.fontawesome.com/3c5be74ba6.js"></script><link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet"><script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+
+    <title>Statics Of World</title>
+
+  </head>
+
+  <body>
+
+  <!--Error Page-->
+
+  <div id="error"><ul><li><img src="https://i.imgur.com/qngZ1ct.png" id="sad"></li>
+
+    <li><h1>404</h1></li>
+
+    <li><h3>Page Not Found.</h3></li>
+
+    <li><h3 style="color:var(--cl);">
+
+Please Check your connection and try again.</h3></li><li><h4  onclick="close1()">Reload Page <img src="https://i.imgur.com/LxgCjxH.png" id="reload"></h4></li>
+
+    </ul>
+
+</div>
+
+<div id="total"><ul class="daily" id="forcast"><li><h1 class="fa fa-spinner fa-spin"></h1></li></ul></div>
+
+    
+
+<div id="countries">
+
+<div id="search-bar">
+
+<input type="text" id="input" onkeyup="searchFun()" placeholder="Search a country."/>
+
+<a href="#table"><button id="button">
+
+Search</button></a></div>
+
+<table id="table" border="2" padding="5"><tr class="bar">
+
+    <th>#</th>
+
+    <th>Country</th>
+
+    <th>New Confirmed</th>
+
+    <th>Total Confirmed</th>
+
+    <th>New Deaths</th>
+
+    <th>Total Deaths</th>
+
+    <th>New Recovered</th>
+
+    <th>Total Recovered</th>
+
+</tr></table></div>
+
+<div id="moreInfo"></div>
+
+<!---->
+
+<div id="health">
+
+    <div data-aos="fade-left"><span><i class="fas fa-hand-sparkles"></i></span><h3>Clean your hands often.</h3></div>
+
+    <div data-aos="fade-right"><span><i class="fas fa-people-arrows"></i></span><h3>Maintain a safe distance from anyone who is coughing or sneezing.</h3></div>
+
+      <div data-aos="fade-left"><span><i class="fas fa-hospital-user"></i></span><h3>If you have a fever, cough and difficulty breathing, seek medical attention.</h3></div>
+
+      <div data-aos="fade-right"><span><i class="fas fa-head-side-mask"></i></span><h3>Cover your nose and mouth.</h3></div>      
+
+        </div>
+
+<script>
+
+//Created By Aziz Sobirov
+
+var more = 
+
+document.getElementById("moreInfo")
+
+var error = 
+
+document.getElementById("error")  
+
+var covid19 = fetch("https://api.covid19api.com/summary")
+
+  .then(response => response.json())
+
+  .then(data => { 
+
+fetchdata = data    
+
+  var length = data.Countries.length
+
+  var date = data.Date.replace(/T/g, " ")
+
+  var con = data.Global.NewConfirmed
+
+  var tCon = data.Global.TotalConfirmed
+
+  var deaths = data.Global.NewDeaths
+
+  var tdeaths = data.Global.TotalDeaths
+
+  var rec = data.Global.NewRecovered
+
+  var tRec= data.Global.TotalRecovered
+
+//Created By Aziz Sobirov
+
+ document.getElementById("total").innerHTML=`<ul class="daily" id="data">
+
+ <li><h2>COVID-19 CORONAVIRUS PANDEMIC
+
+</h2></li><li></li>
+
+   <li><h3>New Confirmed<br>${con}</h3><h3>Total Confirmed<br>${tCon}</h3></li>
+
+   <li><h3>New Deaths<br>${deaths}</h3><h3>Total Deaths<br>${tdeaths}</h3></li>
+
+   <li><h3>New Recovered<br>${rec}</h3><h3>Total Recovered<br>${tRec}</h3></li>
+
+   <li>Last updated: ${date}</li>
+
+   <li><h5>Created By Aziz Sobirov</h5></li>
+
+ </ul> `
+
+for(var i=0;i<length;i++){
+
+ var code = data.Countries[i].CountryCode
+
+var country = data.Countries[i].Country
+
+//Created By Aziz Sobirov
+
+  var dcon = data.Countries[i].NewConfirmed
+
+  var dtCon = data.Countries[i].TotalConfirmed
+
+  var ddeaths = data.Countries[i].NewDeaths
+
+  var dtdeaths = data.Countries[i].TotalDeaths
+
+  var drec = data.Countries[i].NewRecovered
+
+  var dtRec= data.Countries[i].TotalRecovered
+
+ document.getElementById("table").innerHTML+=`<tr class="country" onclick="moreInfo(${i})">
+
+ <td>${i+1}</td>
+
+ <td>${country}</td>
+
+ <td>${dcon}</td>
+
+ <td>${dtCon}</td>
+
+ <td>${ddeaths}</td>
+
+ <td>${dtdeaths}</td>
+
+ <td>${drec}</td>
+
+ <td>${dtRec}</td>     
+
+ </tr>`}
+
+    })
+
+    //Created By Aziz Sobirov
+
+.catch(err => error.style.display="flex")    
+
+function moreInfo(m){
+
+  var code = fetchdata.Countries[m].CountryCode
+
+var country = fetchdata.Countries[m].Country
+
+var dcon = fetchdata.Countries[m].NewConfirmed
+
+  var dtCon = fetchdata.Countries[m].TotalConfirmed
+
+  var ddeaths = fetchdata.Countries[m].NewDeaths
+
+  var dtdeaths = fetchdata.Countries[m].TotalDeaths
+
+  var drec = fetchdata.Countries[m].NewRecovered
+
+  var dtRec= fetchdata.Countries[m].TotalRecovered
+
+//Created By Aziz Sobirov
+
+setTimeout(() => {
+
+more.style.display="flex"
+
+},1000)
+
+//Created By Aziz Sobirov
+
+more.innerHTML=`
+
+<img id="back" onclick="closee()" src="https://i.imgur.com/xaan2hd.png">
+
+<ul class="daily">
+
+<li><h2>${country} , ${code}</h2></li>
+
+   <li><img src="https://flagcdn.com/256x192/${code.toLowerCase()}.png" width="200px" alt="${country}"></li>
+
+  <li><h3>New Confirmed<br>${dcon}</h3><h3>Total Confirmed<br>${dtCon}</h3></li>
+
+   <li><h3>New Deaths<br>${ddeaths}</h3><h3>Total Deaths<br>${dtdeaths}</h3></li>
+
+   <li><h3>New Recovered<br>${drec}</h3><h3>Total Recovered<br>${dtRec}</h3></li>
+
+   <li><h5>Created By Aziz Sobirov</h5></li>
+
+ </ul>
+
+` }  
+
+//Created By Aziz Sobirov
+
+let myTable = document.getElementById('table'); 
+
+ const searchFun = () =>{
+
+let filter = document.getElementById('input').value.toUpperCase();
+
+let tr = myTable.getElementsByTagName('tr');
+
+for (var i=0; i<tr.length; i++){
+
+let td = tr[i].getElementsByTagName('td')[1];
+
+if(td){let textvlaue = td.textContent || td.innerHTML;
+
+if(textvlaue.toUpperCase().indexOf(filter) > -1){ tr[i].style.display = "";
+
+}else{tr[i].style.display = "none";}
+
+        }
+
+    }
+
+} //Created By Aziz Sobirov 
+
+function closee(){
+
+more.style.display="none"
+
+}
+
+function close1(){
+
+error.style.display="none"
+
+}
+
+window.addEventListener("scroll",function(){
+
+var navbar = 
+
+document.getElementById("search-bar");
+
+navbar.classList.toggle("active",window.scrollY > 0);
+
+})
+
+</script> 
+
+    <script>
+
+        AOS.init({
+
+            offset:400,
+
+            duration: 1200,
+
+        })
+
+    </script>       
+
+    <style>
+
+        /*Created By Aziz Sobirov*/
+
+:root{
+
+    --cl:#38b3D0;
+
+    scroll-behavior:smooth;
+
+}*{
+
+    margin:0;padding:0;
+
+    box-sizing:border-box ;
+
+    font-family:"Quicksand";
+
+}
+
+#total,#moreInfo{
+
+    height:100vh;width:100vw;
+
+    display:flex;align-items:center;
+
+    justify-content:center;    background:url("https://i.imgur.com/k0LSWEd.jpg");
+
+    background-size:cover;
+
+}
+
+#moreInfo{
+
+    position:fixed;
+
+    top:0;left:0;display:none;
+
+}
+
+#back{
+
+    position:absolute;
+
+    top:15px;left:15px;
+
+    height:25px;width:25px;
+
+    cursor:pointer;filter:invert(1);
+
+    background-size:cover;
+
+}
+
+#countries{width:100vw;overflow:scroll;
+
+}tr{transition:0.5s;font-weight:600;}
+
+.country:hover{background:#eaebed;}
+
+ul li{list-style:none;}
+
+table{text-align:center ;}
+
+.bar{background:var(--cl);color:#fff;}
+
+#search-bar{
+
+    padding:10px;position:fixed ;
+
+    top:0;left:0;display:flex;
+
+    height:55px;width:100vw;
+
+    transition:0.5s;
+
+    background:transparent ;
+
+}
+
+#search-bar.active{background:#eaebed;}
+
+#search-bar input{
+
+    width:100%;height:100%;
+
+    outline:none;padding:5px;
+
+    border:2.5px solid var(--cl);
+
+    font-size:16px;font-weight:700;
+
+}#search-bar #button{cursor:pointer;
+
+    width:100px;height:100%;
+
+    border:none;outline:none;
+
+    background:var(--cl);color:#fff;
+
+    font-size:18px;font-weight:700;
+
+}#search-bar input:focus::placeholder{
+
+    transition:2s;
+
+    transform:translateX(-100%);}
+
+ul{
+
+    padding:5px;width:95vw;
+
+    background:rgba(255,255,255,.75);
+
+}
+
+li{
+
+    text-align:center ;
+
+    width:100%;padding:5px;
+
+    display:flex;align-items:center ;
+
+    justify-content:space-around;
+
+}
+
+li:nth-child(4){color:#ff0066;}
+
+li:nth-child(5){color:var(--cl);}
+
+td{font-family:"Handlee";}
+
+#forcast{
+
+    height:250px;display:flex;
+
+    place-items:center ;
+
+}
+
+#error{
+
+    position:fixed ;z-index:2;
+
+    background:#fff;
+
+    height:100vh;width:100vw;
+
+    display:none;place-items:center ;
+
+}
+
+#error #sad{height:100px;width:100px;}
+
+#error #reload{height:20px;}
+
+#error h4{
+
+    margin:10px auto;padding:5px;
+
+    width:130px;cursor:pointer ;
+
+    border-radius:20px;color:#000;
+
+    box-shadow:0 0 0 2px #000;
+
+    display:flex;align-items:center ;
+
+    justify-content:space-around;
+
+}
+
+#health{
+
+     width:100vw;display:grid;
+
+     grid-gap:10px;padding:10px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+     overflow:hidden ;
+
+}
+
+#health div{
+
+    width:100%;padding:10px;
+
+    text-align:center ;
+
+}
+
+#health span{
+
+    color:#38b8d0;
+
+    font-size:48px;
+
+}
+
+    </style>
+
+  </body>
+
+</html>
